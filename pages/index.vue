@@ -60,7 +60,8 @@ async function submit() {
     polishWord.value = ''
     
     const result = await getAllWords()
-    console.log('Successfully submitted', result)
+    console.log('Successfully submitted', data)
+    console.log('allWords', result)
 }
 async function deleteWord(id: number) {
     const { data } = await $fetch('/api/word', {
