@@ -5,10 +5,16 @@
     </p>
     <div>
         <p
-            v-for="(word, index) in data.allWords"
+            v-for="(word, index) in allWords"
             :key="`word_${index}`"
         >
             {{ word.englishWord }} -> {{ word.polishWord }}
+            <span
+                style="color: red; cursor: pointer;"
+                @click="deleteWord(word.id)"
+            >
+                x
+            </span>
         </p>
     </div>
     <div>
@@ -29,13 +35,20 @@
 <script setup lang="ts">
 // const { data } = await useFetch('/api/page-visits')
 
-const { data } = await useFetch('/api/words')
+const allWords = ref()
+await getAllWords()
+
+
+async function getAllWords() {
+    const { data } = await useFetch('/api/words')
+    allWords.value = data.value?.allWords
+}
 
 const englishWord = ref('')
 const polishWord = ref('')
 
 async function submit() {
-    const { data } = await $fetch('/api/add-word', {
+    const { data } = await $fetch('/api/word', {
         method: 'post',
         body: {
             englishWord: englishWord.value,
@@ -43,6 +56,22 @@ async function submit() {
         }
     })
 
-    console.log('Successfully submitted', data)
+    englishWord.value = ''
+    polishWord.value = ''
+    
+    const result = await getAllWords()
+    console.log('Successfully submitted', result)
+}
+async function deleteWord(id: number) {
+    const { data } = await $fetch('/api/word', {
+        method: 'delete',
+        body: {
+            id
+        }
+    })
+
+    allWords.value = allWords.value.filter(word => word.id !== id)
+
+    console.log('Successfully deleted', data)
 }
 </script>

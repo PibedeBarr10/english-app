@@ -22,5 +22,5 @@ export async function seed() {
     console.log(`Created "words" table`)
 
     addWords()
-    console.log(`Seeded database with ${initialWords.length} words`)
+    console.log(`Seeded database with ${initialWords.length} rows in table "words"`)
 }
