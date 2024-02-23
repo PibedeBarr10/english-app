@@ -16,7 +16,7 @@
         "@vercel/postgres": "^0.7.2",
         "@vercel/postgres-kysely": "^0.7.2",
         "kysely": "^0.27.2",
-        "nuxt": "^3.10.2",
+        "nuxt": "^3.10.3",
         "vue": "^3.4.19",
         "vue-router": "^4.2.5"
     },

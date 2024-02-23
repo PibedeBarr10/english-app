@@ -12,5 +12,5 @@ export default antfu({
             }],
         },
     },
-    ignores: [],
+    // ignores: [],
 })

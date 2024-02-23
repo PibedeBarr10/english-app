@@ -26,23 +26,23 @@
     </div>
 </template>
 
+<!-- eslint-disable no-console -->
 <script setup lang="ts">
 // const { data } = await useFetch('/api/page-visits')
 
-const allWords = ref()
-await getAllWords()
+const allWords = toRef(await getAllWords())
 
 async function getAllWords() {
     const { data } = await useFetch('/api/words')
-    allWords.value = data.value?.allWords
+    return data.value?.allWords
 }
 
 const englishWord = ref('')
 const polishWord = ref('')
 
 async function submit() {
-    const { data } = await $fetch('/api/word', {
-        method: 'post',
+    const { data } = await useFetch('/api/word', {
+        method: 'POST',
         body: {
             englishWord: englishWord.value,
             polishWord: polishWord.value,
@@ -52,7 +52,7 @@ async function submit() {
     englishWord.value = ''
     polishWord.value = ''
 
-    await getAllWords()
+    allWords.value = await getAllWords()
     console.log('Successfully submitted', data)
     console.log('allWords', allWords.value)
 }
@@ -64,7 +64,7 @@ async function deleteWord(id: number) {
         },
     })
 
-    allWords.value = allWords.value.filter(word => word.id !== id)
+    allWords.value = allWords.value?.filter(word => word.id !== id)
 
     console.log('Successfully deleted', data)
 }

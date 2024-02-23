@@ -18,9 +18,11 @@ export default defineEventHandler(async (event) => {
         const data = await addWord(body)
         return { data }
     }
-    catch (error: any) {
+    catch (error) {
         // error 500 after seeding a table? "Do not know how to serialize a BigInt"
         // throw error // Handle errors
         console.error(error)
     }
+
+    return { data: [] }
 })
