@@ -1,6 +1,6 @@
 import { db } from '@/server/orm/kysely'
 
-const deleteWord = async (body: any) => {
+async function deleteWord(body: any) {
     console.warn(`Deleting "words" row with id: ${body.id}`)
     const result = await db
         .deleteFrom('words')
@@ -15,7 +15,8 @@ export default defineEventHandler(async (event) => {
     let data
     try {
         data = await deleteWord(body)
-    } catch (error: any) {
+    }
+    catch (error: any) {
         // error 500 after seeding a table? "Do not know how to serialize a BigInt"
         // throw error // Handle errors
         console.error(error)

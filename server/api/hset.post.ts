@@ -5,9 +5,10 @@ export default defineEventHandler(async (event) => {
     try {
         await kv.hset('dictionary_ENG_PL', {
             eng: body.eng,
-            pl: body.pl
+            pl: body.pl,
         })
-    } catch (error) {
+    }
+    catch (error) {
         // Handle errors
         console.error(error)
     }

@@ -4,15 +4,9 @@
         <!-- {{ data?.pageVisits }} -->
     </p>
     <div>
-        <p
-            v-for="(word, index) in allWords"
-            :key="`word_${index}`"
-        >
+        <p v-for="(word, index) in allWords" :key="`word_${index}`">
             {{ word.englishWord }} -> {{ word.polishWord }}
-            <span
-                style="color: red; cursor: pointer;"
-                @click="deleteWord(+word.id)"
-            >
+            <span style="color: red; cursor: pointer;" @click="deleteWord(+word.id)">
                 x
             </span>
         </p>
@@ -38,7 +32,6 @@
 const allWords = ref()
 await getAllWords()
 
-
 async function getAllWords() {
     const { data } = await useFetch('/api/words')
     allWords.value = data.value?.allWords
@@ -52,23 +45,23 @@ async function submit() {
         method: 'post',
         body: {
             englishWord: englishWord.value,
-            polishWord: polishWord.value
-        }
+            polishWord: polishWord.value,
+        },
     })
 
     englishWord.value = ''
     polishWord.value = ''
-    
-    const result = await getAllWords()
+
+    await getAllWords()
     console.log('Successfully submitted', data)
-    console.log('allWords', result)
+    console.log('allWords', allWords.value)
 }
 async function deleteWord(id: number) {
     const { data } = await $fetch('/api/word', {
         method: 'delete',
         body: {
-            id
-        }
+            id,
+        },
     })
 
     allWords.value = allWords.value.filter(word => word.id !== id)

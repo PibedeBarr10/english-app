@@ -7,7 +7,9 @@ export default antfu({
     },
     vue: {
         overrides: {
-            // 'vue/operator-linebreak': ['error', 'before'],
+            'vue/component-tags-order': ['error', {
+                order: ['template', 'script', 'style'],
+            }],
         },
     },
     ignores: [],

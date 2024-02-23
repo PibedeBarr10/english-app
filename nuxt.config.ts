@@ -2,12 +2,12 @@
 export default defineNuxtConfig({
   typescript: {
     typeCheck: true,
-    strict: true
+    strict: true,
   },
   nitro: {
     storage: {
-      kv: { driver: 'vercelKV' }
-    }
+      kv: { driver: 'vercelKV' },
+    },
   },
-  devtools: { enabled: true }
+  devtools: { enabled: true },
 })
