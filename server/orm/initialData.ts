@@ -1,4 +1,4 @@
-import { TNewWord } from './types/tables/words'
+import type { TNewWord } from './types/tables/words'
 
 export const initialWords: TNewWord[] = [
     {

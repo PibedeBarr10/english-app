@@ -11,7 +11,7 @@
             {{ word.englishWord }} -> {{ word.polishWord }}
             <span
                 style="color: red; cursor: pointer;"
-                @click="deleteWord(word.id)"
+                @click="deleteWord(+word.id)"
             >
                 x
             </span>

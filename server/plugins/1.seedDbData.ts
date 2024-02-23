@@ -1,11 +1,11 @@
 import { db, sql } from '@/server/orm/kysely'
 import { seed } from '../orm/seed'
 
-interface BigInt {
+interface BigInt extends BigIntConstructor {
     /** Convert to BigInt to string form in JSON.stringify */
     toJSON: () => string
 }
-BigInt.prototype.toJSON = function () {
+(BigInt.prototype as unknown as BigInt).toJSON = function () {
     return this.toString()
 }
 
