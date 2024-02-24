@@ -1,6 +1,6 @@
 import { db } from '@/server/orm/kysely'
 
-async function addWord(body: any) {
+async function addWord(body: TBody) {
     const result = await db
         .insertInto('words')
         .values([{
@@ -12,8 +12,13 @@ async function addWord(body: any) {
     return result
 }
 
+type TBody = {
+    englishWord: string
+    polishWord: string
+}
+
 export default defineEventHandler(async (event) => {
-    const body = await readBody(event)
+    const body = await readBody(event) as TBody
     try {
         const data = await addWord(body)
         return { data }

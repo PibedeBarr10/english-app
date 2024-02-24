@@ -1,11 +1,11 @@
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async () => {
     const storage = useStorage('kv')
 
-    let pageVisits = (await storage.getItem('pageVisits') ?? 0) as number
+    const pageVisits = (await storage.getItem('pageVisits') ?? 0) as number
     const updatedPageVisits = pageVisits + 1
     await storage.setItem('pageVisits', updatedPageVisits)
 
     return {
-        pageVisits: updatedPageVisits
+        pageVisits: updatedPageVisits,
     }
 })

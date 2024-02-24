@@ -1,32 +1,64 @@
 <template>
-    <h1>hello world!</h1>
+    <h1 class="font-bold mb-4">
+        English App
+    </h1>
     <p>
         <!-- {{ data?.pageVisits }} -->
     </p>
-    <div>
-        <p v-for="(word, index) in allWords" :key="`word_${index}`">
-            {{ word.englishWord }} -> {{ word.polishWord }}
-            <span style="color: red; cursor: pointer;" @click="deleteWord(+word.id)">
-                x
-            </span>
-        </p>
-    </div>
-    <div>
-        <form @submit.prevent="submit">
-            <p>English</p>
-            <input v-model="englishWord">
+    <ul>
+        <li
+            v-for="(word, index) in allWords"
+            :key="`word_${index}`"
+            class="flex justify-between mb-2"
+        >
+            <p>
+                {{ word.englishWord }} -> {{ word.polishWord }}
+            </p>
+            <UButton
+                icon="i-heroicons-trash"
+                size="sm"
+                square
+                color="red"
+                variant="solid"
+                @click="deleteWord(+word.id)"
+            />
+        </li>
+    </ul>
 
-            <p>Polish</p>
-            <input v-model="polishWord">
+    <UDivider class="my-4" />
 
-            <button type="submit">
+    <div>
+        <h2 class="font-bold mb-4">
+            Add new word
+        </h2>
+        <form
+            class="flex flex-col gap-4"
+            @submit.prevent="submit"
+        >
+            <UFormGroup label="English">
+                <UInput
+                    v-model="englishWord"
+                    placeholder="English word..."
+                />
+            </UFormGroup>
+
+            <UFormGroup label="Polish">
+                <UInput
+                    v-model="polishWord"
+                    placeholder="Polish word..."
+                />
+            </UFormGroup>
+
+            <UButton
+                block
+                type="submit"
+            >
                 Submit
-            </button>
+            </UButton>
         </form>
     </div>
 </template>
 
-<!-- eslint-disable no-console -->
 <script setup lang="ts">
 // const { data } = await useFetch('/api/page-visits')
 
@@ -41,6 +73,11 @@ const englishWord = ref('')
 const polishWord = ref('')
 
 async function submit() {
+    if (!englishWord.value || !polishWord.value) {
+        console.warn('Empty data')
+        return
+    }
+
     const { data } = await useFetch('/api/word', {
         method: 'POST',
         body: {

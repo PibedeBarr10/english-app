@@ -12,6 +12,7 @@
         "lint:fix": "eslint . --fix"
     },
     "dependencies": {
+        "@nuxt/ui": "^2.14.1",
         "@vercel/kv": "^1.0.1",
         "@vercel/postgres": "^0.7.2",
         "@vercel/postgres-kysely": "^0.7.2",

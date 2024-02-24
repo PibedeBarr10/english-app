@@ -1,4 +1,4 @@
-import { type TWordTable } from './tables/words'
+import type { TWordTable } from './tables/words'
 
 // Keys of this interface are table names.
 export type TDatabase = {

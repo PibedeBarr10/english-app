@@ -1,15 +1,16 @@
-import { db, sql } from '@/server/orm/kysely'
 import { seed } from '../orm/seed'
+import { db, sql } from '@/server/orm/kysely'
 
-interface BigInt extends BigIntConstructor {
+type IBigInt = {
     /** Convert to BigInt to string form in JSON.stringify */
     toJSON: () => string
-}
-(BigInt.prototype as unknown as BigInt).toJSON = function () {
+} & BigIntConstructor
+
+(BigInt.prototype as unknown as IBigInt).toJSON = function () {
     return this.toString()
 }
 
-export default defineNitroPlugin(async (nitroApp) => {
+export default defineNitroPlugin(async () => {
     if (import.meta.dev) {
         console.log('--- db seed skipped ---')
         return
@@ -21,7 +22,6 @@ export default defineNitroPlugin(async (nitroApp) => {
             schemaname = 'public' AND tablename  = 'words')`.execute(db)
     console.log('result', result.rows[0]?.exists)
 
-    if (!result.rows[0]?.exists) {
+    if (!result.rows[0]?.exists)
         await seed()
-    }
 })

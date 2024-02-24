@@ -1,26 +1,4 @@
 {
     // https://nuxt.com/docs/guide/concepts/typescript
-    "extends": "./.nuxt/tsconfig.json",
-    "compilerOptions": {
-        "lib": [
-            "ESNext",
-            "DOM"
-        ]
-        // "strictNullChecks": true,
-        // "noImplicitAny": true
-    }
-    // "include": [
-    //     "./.nuxt/nuxt.d.ts",
-    //     "**/*",
-    //     "modules/**/*.vue",
-    //     "modules/**/*.ts"
-    // ]
-    // "include": [
-    //     "env.d.ts",
-    //     ".nuxt/nuxt.d.ts",
-    //     "../**/*",
-    //     "./@nuxt/devtools/runtime",
-    //     "./@nuxt/telemetry/runtime",
-    //     "."
-    // ]
+    "extends": "./.nuxt/tsconfig.json"
 }
