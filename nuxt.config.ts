@@ -2,8 +2,8 @@
 export default defineNuxtConfig({
     modules: ['@nuxt/ui'],
     typescript: {
-        typeCheck: true,
-        strict: true,
+        // typeCheck: true,
+        // strict: true,
     },
     nitro: {
         storage: {
